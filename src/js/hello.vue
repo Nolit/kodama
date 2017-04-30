@@ -1,8 +1,9 @@
 <template>
   <div>
-    <input v-model="message">
+  <mdl-textfield label="Name" v-model="message"></mdl-textfield>
     <p>message: {{message}}</p>
-    <button @click="greet">Greet</button>
+    
+    <mdl-button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--colored" @click="greet">Greet</mdl-button>
   </div>
 </template>
 
@@ -19,7 +20,7 @@
         message: String
 
         greet () {
-            alert('greeting: ' + this.message)
+            alert('greeting: ' + this.message + 1)
         }
     }
 </script>
