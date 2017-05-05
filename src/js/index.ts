@@ -25,7 +25,7 @@ class MyApplication {
     onReady(){
         // this.mainWindow.webContents.openDevTools();
         this.mainWindow = new BrowserWindow({
-            width: 600,
+            width: 800,
             height: 400,
             minWidth: 300,
             minHeight: 200,
