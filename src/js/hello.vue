@@ -8,8 +8,8 @@
 </template>
 
 <script lang="ts">
-    import Vue from 'vue'
-    import Component from 'vue-class-component'
+  import * as Vue from 'vue'
+  import Component from 'vue-class-component'
 
     @Component({
         props: {
@@ -17,7 +17,7 @@
         }
     })
     export default class MyComponent extends Vue {
-        message: String
+        message: String;
 
         greet () {
             alert('greeting: ' + this.message + 1)
