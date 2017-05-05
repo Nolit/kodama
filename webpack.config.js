@@ -11,7 +11,9 @@ module.exports = {
         path: __dirname + '/dist',
         filename: "./js/[name].js"
     },
-
+    resolve: {
+        extensions: [' ', '.js', '.vue', '.ts']
+    },
     target: "web",
     externals: [nodeExternals()],
 
@@ -21,7 +23,7 @@ module.exports = {
                 exclude: /node_modules|vue\/src/,
                 loader: 'ts-loader',
                 options: {
-                    appendTsSuffixTo: [/\.vue$/],
+                    appendTsSuffixTo: [/\.vue$/]
                 }
             },
             {
@@ -33,4 +35,4 @@ module.exports = {
             }
         ]
     }
-}
+};
