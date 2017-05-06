@@ -1,12 +1,10 @@
 import * as Vue from 'vue'
 import VueMdl from 'vue-mdl'
-import Hello from './hello'
+import Application from './application'
 
 Vue.use(VueMdl);
 
 new Vue({
   el: '#app',
-  render: h => h(Hello, {
-    props: { message: 'Hello World' }
-  })
+  render: h => h(Application)
 });
