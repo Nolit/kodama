@@ -1,7 +1,7 @@
 <template>
   <div>
-    <input class="col s5" v-model="source" v-on:keyup="searchOrNothing" />
-    <button class="col s1 btn small waves-effect waves-light" type="submit" name="action">
+    <input class="col s5" v-model="source" v-on:keyup="searchIfNeed" />
+    <button class="col s1 btn small waves-effect waves-light" type="submit" name="action" @click="exchange">
       <i class="material-icons">repeat</i>
     </button>
     <input disabled v-model="result" type="text" class="col s5 black-text" />
@@ -14,16 +14,18 @@
 
     @Component({
       props: {
-        result: String
+        source: String,
+        result: String,
+        isEnglishMode: Boolean
       }
     })
     export default class ExchangeableFields extends Vue {
       source: String = "";
       result: String = "";
+      isEnglishMode: Boolean;
       searchTimer: number;
 
-      searchOrNothing () {
-        console.log("input now: " + this.source);
+      searchIfNeed () {
         clearTimeout(this.searchTimer);
         this.searchTimer = setTimeout(function(me){
             me.fire('search');
@@ -32,6 +34,11 @@
 
       fire(eventName: string){
         super.$emit(eventName, this.source);
+      }
+
+      exchange(){
+          clearTimeout(this.searchTimer);
+          this.fire('exchange')
       }
     }
 </script>
