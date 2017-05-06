@@ -8,7 +8,7 @@
         </div>
         <div class="row">
             <div class="col s1"></div>
-            <historyTable class="col s10" :history="history"></historyTable>
+            <historyTable class="col s10" :history="history" v-on:delete="deleteHistory"></historyTable>
             <div class="col s1"></div>
         </div>
     </div>
@@ -59,6 +59,10 @@
         clear(){
             this.source = "";
             this.result = "";
+        }
+
+        deleteHistory(index: number){
+            this.history.splice(index, 1);
         }
     }
 </script>
