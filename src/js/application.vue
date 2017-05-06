@@ -19,6 +19,8 @@
     import Component from 'vue-class-component'
     import exchangeableFields from "./exchangeable-fields"
     import historyTable from "./history-table"
+    import axios from "axios"
+    const config = require('config');
 
     @Component({
         components: {
@@ -33,16 +35,24 @@
         history: Array<Object> =[];
 
         search(source: string){
-            console.log(`${source}を検索します`);
+            console.log("isEnglish"+this.isEnglishMode);
+            const target = this.isEnglishMode ? 'ja' : 'en';
+            const apiKey = config.apiKey;
+            axios.get(`https://www.googleapis.com/language/translate/v2?q=${source}&target=${target}&key=${apiKey}`)
+                .then(response => {
+                    this.result = response.data.data.translations[0].translatedText;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
             this.source = source;
-            this.result = source + "123";
         }
 
         exchange(source: string){
             const tmp = source;
             this.source = this.result;
             this.result = tmp;
-            this.isEnglishMode = this.isEnglishMode!;
+            this.isEnglishMode = ! this.isEnglishMode;
         }
 
         add(){
