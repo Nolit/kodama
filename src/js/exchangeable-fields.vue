@@ -14,7 +14,7 @@
 
     @Component({
       props: {
-        search: Function
+        result: String
       }
     })
     export default class ExchangeableFields extends Vue {
