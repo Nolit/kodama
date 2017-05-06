@@ -20,8 +20,8 @@
       }
     })
     export default class ExchangeableFields extends Vue {
-      source: String = "";
-      result: String = "";
+      source: String;
+      result: String;
       isEnglishMode: Boolean;
       searchTimer: number;
 
