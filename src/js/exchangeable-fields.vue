@@ -31,7 +31,7 @@
       }
 
       fire(eventName: string){
-        super.$emit(eventName);
+        super.$emit(eventName, this.source);
       }
     }
 </script>

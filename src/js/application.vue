@@ -16,8 +16,8 @@
         components: { exchangeableFields }
     })
     export default class Application extends Vue {
-        search(){
-            console.log("単語を検索します")
+        search(source: string){
+            console.log(`${source}を検索します`);
         }
     }
 </script>
