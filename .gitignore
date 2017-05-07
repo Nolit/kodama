@@ -3,3 +3,4 @@ dist/
 .idea/
 typings/
 config/default.json
+config/local.yaml

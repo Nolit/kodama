@@ -20,7 +20,8 @@
     import exchangeableFields from "./exchangeable-fields"
     import historyTable from "./history-table"
     import axios from "axios"
-    const config = require('config');
+    const config = require('config').config;
+    const url = config.url;
 
     @Component({
         components: {
@@ -32,10 +33,22 @@
         source: string = "";
         result: string = "";
         isEnglishMode: boolean = true;
-        history: Array<Object> =[];
+        history: Array<{source: String, result: String, id: number}> = [];
+
+        constructor(){
+            super();
+            axios.get(url.root + '/' + url.history)
+                .then(response => {
+                    response.data.forEach(data => {
+                        this.history.push(data);
+                    });
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
 
         search(source: string){
-            console.log("isEnglish"+this.isEnglishMode);
             const target = this.isEnglishMode ? 'ja' : 'en';
             const apiKey = config.apiKey;
             axios.get(`https://www.googleapis.com/language/translate/v2?q=${source}&target=${target}&key=${apiKey}`)
@@ -59,11 +72,26 @@
             if( ! this.source || ! this.result){
                 return;
             }
-            this.history.push({
+            const data = {
+                id: 0,
                 source: this.source,
                 result: this.result
-            });
+            };
+
+            axios.post(url.root + '/' + url.history, data)
+                .then(response => {
+                    if(response.data.isSuccess){
+                        data.id = response.data.history.id;
+                    }else{
+                        console.log('Error');
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            this.history.push(data);
             this.clear();
+
         }
 
         clear(){
@@ -72,6 +100,17 @@
         }
 
         deleteHistory(index: number){
+            axios.delete(url.root + '/' + url.history + `/${this.history[index].id}`)
+                .then(response => {
+                    if(response.data.isSuccess){
+
+                    }else{
+                        console.log('Error');
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                });
             this.history.splice(index, 1);
         }
     }

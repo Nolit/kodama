@@ -1,0 +1,4 @@
+config:
+    url:
+        root: "http://localhost:8080"
+        history: "api/history"
